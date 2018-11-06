@@ -1,8 +1,21 @@
 # Spring-Boot Camel QuickStart
 
-This example demonstrates how you can use Apache Camel with Spring Boot.
+This demo demonstrates how to use SQL via JDBC along with Camel's REST DSL to expose a RESTful API.
 
-The quickstart uses Spring Boot to configure a little application that includes a Camel route that triggers a message every 5th second, and routes the message to a log.
+This example relies on the Fabric8 Maven plugin for its build configuration and uses the FIS Java base image
+
+
+
+Background
+
+
+This is a microservice that connects to a table in MySQL database, that provide 3 different functionality through APIs
+
+Balance By providing the account id, it will retreive the remaining balance from the table and returns the result as Text.
+Profile By providing the account id,
+Transfer By providing the sender id, receiver id and also the amount to transfer, it will update the balance of both the sender and receiver on the remaining balance respectively. Transaction is needed this time, in case if there are any problem when updating the tables.
+
+
 
 ### Building
 
