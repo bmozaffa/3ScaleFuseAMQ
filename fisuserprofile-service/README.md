@@ -14,7 +14,7 @@ This example relies on the Fabric8 Maven plugin for its build configuration and 
 
 This is a Fuse Service that use SQl commponent to connects to a table in database, that reterieve particular user Profile By providing the profile id and return out as a jason format.
 
-  ![alt text](../images/Service1.png "Fuse Service 1")
+  ![alt text](../images/service1.png "Fuse Service 1")
 
 
 
