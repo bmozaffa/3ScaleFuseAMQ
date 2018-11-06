@@ -15,7 +15,7 @@ Balance By providing the account id, it will retreive the remaining balance from
 Profile By providing the account id,
 Transfer By providing the sender id, receiver id and also the amount to transfer, it will update the balance of both the sender and receiver on the remaining balance respectively. Transaction is needed this time, in case if there are any problem when updating the tables.
 
-![alt text](../images/Service1.png "Fuse Service 1")
+               ![alt text](../images/Service1.png "Fuse Service 1")
 
 
 
