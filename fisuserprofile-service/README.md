@@ -1,4 +1,4 @@
-# Spring-Boot Camel QuickStart
+# Spring-Boot Fuse/Camel Sample Service 1
 
 This demo demonstrates how to use SQL via JDBC along with Camel's REST DSL to expose a RESTful API.
 
@@ -6,14 +6,11 @@ This example relies on the Fabric8 Maven plugin for its build configuration and 
 
 
 
-Background
+## Background
 
 
-This is a microservice that connects to a table in MySQL database, that provide 3 different functionality through APIs
 
-Balance By providing the account id, it will retreive the remaining balance from the table and returns the result as Text.
-Profile By providing the account id,
-Transfer By providing the sender id, receiver id and also the amount to transfer, it will update the balance of both the sender and receiver on the remaining balance respectively. Transaction is needed this time, in case if there are any problem when updating the tables.
+This is a Fuse Service that use SQl commponent to connects to a table in database, that reterieve particular user Profile By providing the profile id as jason string.
 
   ![alt text](../images/Service1.png "Fuse Service 1")
 
