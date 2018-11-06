@@ -21,6 +21,20 @@ This is a Fuse Service that use SQl commponent to connects to a table in databas
 The example can be built with
 
     mvn clean install
+    
+    
+### Running the example locally
+
+The example can be run locally using the following Maven goal:
+
+    $ mvn spring-boot:run
+
+This uses an embedded in-memory HSQLDB database. You can use the default Spring Boot profile in case you have a MySQL server available for you to test.
+
+You can then access the REST API directly from your Web browser, e.g.:
+
+
+- <http://localhost:8080/cicd/user/profile/123456>    
 
 ### Running the example in OpenShift
 
