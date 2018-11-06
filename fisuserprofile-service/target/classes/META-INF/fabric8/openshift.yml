@@ -6,9 +6,11 @@ items:
   kind: Service
   metadata:
     annotations:
+      fabric8.io/git-commit: 078b051378ef47c2fd8e17edd53aae2482f4b114
       fabric8.io/iconUrl: img/icons/camel.svg
-      prometheus.io/port: "9779"
+      fabric8.io/git-branch: master
       prometheus.io/scrape: "true"
+      prometheus.io/port: "9779"
     labels:
       expose: "true"
       app: camel-ose-springboot-xml
@@ -30,7 +32,9 @@ items:
   kind: DeploymentConfig
   metadata:
     annotations:
+      fabric8.io/git-commit: 078b051378ef47c2fd8e17edd53aae2482f4b114
       fabric8.io/iconUrl: img/icons/camel.svg
+      fabric8.io/git-branch: master
       fabric8.io/metrics-path: dashboard/file/camel-routes.json/?var-project=camel-ose-springboot-xml&var-version=1.0.0-SNAPSHOT
     labels:
       app: camel-ose-springboot-xml
@@ -52,7 +56,9 @@ items:
     template:
       metadata:
         annotations:
+          fabric8.io/git-commit: 078b051378ef47c2fd8e17edd53aae2482f4b114
           fabric8.io/iconUrl: img/icons/camel.svg
+          fabric8.io/git-branch: master
           fabric8.io/metrics-path: dashboard/file/camel-routes.json/?var-project=camel-ose-springboot-xml&var-version=1.0.0-SNAPSHOT
         labels:
           app: camel-ose-springboot-xml

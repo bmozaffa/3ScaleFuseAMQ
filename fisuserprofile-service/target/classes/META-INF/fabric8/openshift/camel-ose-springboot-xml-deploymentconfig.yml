@@ -3,7 +3,9 @@ apiVersion: apps.openshift.io/v1
 kind: DeploymentConfig
 metadata:
   annotations:
+    fabric8.io/git-commit: 078b051378ef47c2fd8e17edd53aae2482f4b114
     fabric8.io/iconUrl: img/icons/camel.svg
+    fabric8.io/git-branch: master
     fabric8.io/metrics-path: dashboard/file/camel-routes.json/?var-project=camel-ose-springboot-xml&var-version=1.0.0-SNAPSHOT
   labels:
     app: camel-ose-springboot-xml
@@ -25,7 +27,9 @@ spec:
   template:
     metadata:
       annotations:
+        fabric8.io/git-commit: 078b051378ef47c2fd8e17edd53aae2482f4b114
         fabric8.io/iconUrl: img/icons/camel.svg
+        fabric8.io/git-branch: master
         fabric8.io/metrics-path: dashboard/file/camel-routes.json/?var-project=camel-ose-springboot-xml&var-version=1.0.0-SNAPSHOT
       labels:
         app: camel-ose-springboot-xml
