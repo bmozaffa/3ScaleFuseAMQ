@@ -6,7 +6,7 @@
 
 
 
-##<story>
+## <story>
 I'm a developer that's created an integration application consisting of
 Multiple services working in combination (let's say single front end with dispatch to two back-ends)
 One or more APIs that need to be managed via 3scale
