@@ -1,4 +1,5 @@
 spec:
+  replicas: 1
   template:
     spec:
       containers:
@@ -11,5 +12,11 @@ spec:
               cpu: "1.0"
 #              memory: 256Mi
           env:
-          - name: SPRING_APPLICATION_JSON
-            value: '{"server":{"tomcat":{"max-threads":1}}}'
+          - name: MYSQL_SERVICE_NAME
+            value: mysql
+          - name: MYSQL_SERVICE_DATABASE
+            value: sampledb
+          - name: MYSQL_SERVICE_USERNAME
+            value: ${mysql-service-username}
+          - name: MYSQL_SERVICE_PASSWORD
+            value: ${mysql-service-password}
