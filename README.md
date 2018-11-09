@@ -1,8 +1,7 @@
-# Spring-Boot Camel QuickStart
+# 3ScaleFuseAMQ
 
-This example demonstrates how you can use Apache Camel with Spring Boot.
 
-The quickstart uses Spring Boot to configure a little application that includes a Camel route that triggers a message every 5th second, and routes the message to a log.
+![alt text](images/outline.png "outline")
 
 ### Building
 
