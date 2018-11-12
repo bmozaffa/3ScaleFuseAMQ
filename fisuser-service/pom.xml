@@ -105,6 +105,9 @@
 			<artifactId>arquillian-junit-container</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+		
+		
 
 	</dependencies>
 
