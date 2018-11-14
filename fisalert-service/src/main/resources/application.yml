@@ -34,7 +34,7 @@ activemq:
 # The following properties can be customized using the 'ACTIVEMQ_SERVICE_HOST' and 'ACTIVEMQ_SERVICE_PORT' environment variables.
 # This is indeed done automatically by Kubernetes when the application is deployed in a namespace containing an instance of ActiveMQ named 'activemq'.
 # The service defaults to localhost. You need to change these properties for development purposes only.
-    host: 127.0.0.1
+    host: broker-amq-tcp.cicddemo.svc
     port: 61616
   broker: 
     username: admin
@@ -60,8 +60,8 @@ spring:
  mail:
     host: smtp.gmail.com
     port: 587
-    username: 
-    password: 
+    username: abdulhameedmemon@gmail.com
+    password: sangipharhoo12
     protocol: smtp
     tls: true
     properties.mail.smtp:
@@ -75,7 +75,7 @@ spring:
 
 
 
-mailFrom: 
+mailFrom: abdulhameedmemon@gmail.com
 
 message:   Hello from MOCK Profile
 fromRoute: direct:input
