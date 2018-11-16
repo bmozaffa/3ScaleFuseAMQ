@@ -32,17 +32,17 @@ public class ApplicationTest {
 	public void testProfile() {
 
 		// Then call the REST API
-		ResponseEntity<UserProfiles> profileResponse = restTemplate.getForEntity("/cicd/user/profile/123456",
+		ResponseEntity<UserProfiles> profileResponse = restTemplate.getForEntity("/cicd/user/profile/11111",
 				UserProfiles.class);
 		assertThat(profileResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
 		UserProfiles userProfile = profileResponse.getBody();
-        assertThat(userProfile.getFirstName()).isEqualTo("Simon C");
-        assertThat(userProfile.getLastName()).isEqualTo("username2");
-        assertThat(userProfile.getEmail()).isEqualTo("username2@gmail.com");
-        assertThat(userProfile.getUsername()).isEqualTo("username2");
-		assertThat(userProfile.getPhone()).isEqualTo("7264947276");
+        assertThat(userProfile.getFirstName()).isEqualTo("Abdul");
+        assertThat(userProfile.getLastName()).isEqualTo("Hameed");
+        assertThat(userProfile.getEmail()).isEqualTo("abdulhameedmemon@gmail.com");
+        assertThat(userProfile.getUsername()).isEqualTo("ahameed");
+		assertThat(userProfile.getPhone()).isEqualTo("6364858533");
         assertThat(userProfile.getState()).isEqualTo("MA");
-        assertThat(userProfile.getAddr()).isEqualTo("43 SLIVER EAGLE ST, RIVER");
+        assertThat(userProfile.getAddr()).isEqualTo("172 waltham");
 
 	}
 

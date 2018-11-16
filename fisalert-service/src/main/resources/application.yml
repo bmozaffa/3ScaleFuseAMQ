@@ -5,8 +5,8 @@ camel:
     main-run-controller: true
 
 # Binding health checks to a different port
-management:
-  port: 8081
+#management:
+  #port: 8081
 
 # disable all management enpoints except health
 endpoints:
@@ -56,6 +56,7 @@ activemq:
 #activemq.broker.username=theuser
 #activemq.broker.password=thepassword
 
+
 spring:
  mail:
     host: smtp.gmail.com
@@ -83,4 +84,5 @@ toRoute: mock:output
 selectNode: mock:output1
 errorRoute: mock:output2
 healthRoute: direct:health
+  
   

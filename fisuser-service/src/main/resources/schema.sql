@@ -11,10 +11,10 @@ create table  userprofile (
   username varchar(50)
 );
 
-INSERT INTO userprofile (id, firstName, lastName,email,phone,addr,state,username) VALUES (223455,'Chris L', 'username1','username1@gmail.com','6364858533','4 BLACK DEER ST, STONE','TX','username1');
-INSERT INTO userprofile (id, firstName, lastName,email,phone,addr,state,username) VALUES (123456,'Simon C', 'username2','username2@gmail.com','7264947276','43 SLIVER EAGLE ST, RIVER','MA','username2');
-INSERT INTO userprofile (id, firstName, lastName,email,phone,addr,state,username) VALUES (234567,'Amber K', 'username3','username3@gmail.com','4274558382','67 RED LION ST ROCK','NY','username3');
-INSERT INTO userprofile (id, firstName, lastName,email,phone,addr,state,username) VALUES (345678,'Kelly J', 'username4','username4@gmail.com','3530880835','8 GREEN SHARK ST, MOUNTAIN','CA','username4');
+INSERT INTO userprofile (id, firstName, lastName,email,phone,addr,state,username) VALUES (11111,'Abdul', 'Hameed','abdulhameedmemon@gmail.com','6364858533','172 waltham','MA','ahameed');
+INSERT INTO userprofile (id, firstName, lastName,email,phone,addr,state,username) VALUES (22222,'test2', 'test2','ahameed@redhat.com','7264947276','43 SLIVER EAGLE ST, RIVER','MA','username2');
+INSERT INTO userprofile (id, firstName, lastName,email,phone,addr,state,username) VALUES (33333,'test3', 'username3','abdulhameed.memon@yahoo.com','4274558382','67 RED LION ST ROCK','NY','username3');
+INSERT INTO userprofile (id, firstName, lastName,email,phone,addr,state,username) VALUES (44444,'Kelly J', 'username4','username4@gmail.com','3530880835','8 GREEN SHARK ST, MOUNTAIN','CA','username4');
 
 
 

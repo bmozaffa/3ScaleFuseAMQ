@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd        http://camel.apache.org/schema/spring       http://camel.apache.org/schema/spring/camel-spring.xsd">
+    <bean
+        class="org.apache.camel.component.hystrix.metrics.servlet.HystrixEventStreamServlet"
+        id="hystrixEventStreamServlet" scope="singleton"/>
+    <bean
+        class="org.apache.camel.component.servlet.CamelHttpTransportServlet"
+        id="camelHttpTransportServlet" scope="singleton"/>
+    <bean
+        class="org.springframework.boot.web.servlet.ServletRegistrationBean"
+        id="servlet" scope="singleton">
+        <property name="name" value="CamelServlet"/>
+        <property name="servlet" ref="camelHttpTransportServlet"/>
+        <property name="urlMappings" value="/cicd/*"/>
+    </bean>
+    <bean
+        class="org.springframework.boot.web.servlet.ServletRegistrationBean"
+        id="hystrixservlet" scope="singleton">
+        <property name="name" value="HystrixServlet"/>
+        <property name="servlet" ref="hystrixEventStreamServlet"/>
+        <property name="urlMappings" value="/hystrix.stream"/>
+    </bean>
+    <camelContext id="camel" xmlns="http://camel.apache.org/schema/spring">
+        <restConfiguration apiContextPath="api-docs" bindingMode="json"
+            component="servlet" contextPath="/cicd" enableCORS="true">
+            <apiProperty key="cors" value="true"/>
+            <apiProperty key="api.title" value="FIS Gateway"/>
+            <apiProperty key="api.version" value="1.0.0"/>
+            <corsHeaders key="Access-Control-Allow-Origin" value="*"/>
+            <corsHeaders key="Access-Control-Allow-Methods" value="GET, HEAD, POST, PUT, DELETE, TRACE, OPTIONS, CONNECT, PATCH"/>
+            <corsHeaders key="Access-Control-Allow-Headers" value="Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers"/>
+        </restConfiguration>
+        <rest id="rest-20a908e5-a77a-4dd3-84c6-c59429d59f6a" path="/maingateway">
+            <get id="get-3b123fbf-b92a-4270-9e0a-0fd89a066e4e" uri="profile/{acctid}">
+                <to uri="direct:getprofile"/>
+            </get>
+        </rest>
+        <route id="gateway">
+            <from id="_to1" uri="direct:getprofile"/>
+            <removeHeaders id="_removeHeaders1" pattern="Camel*"/>
+            <setHeader headerName="CamelHttpMethod" id="_setHeader1">
+                <constant>GET</constant>
+            </setHeader>
+            <hystrix id="_hystrix5">
+                <hystrixConfiguration
+                    circuitBreakerSleepWindowInMilliseconds="10000" executionTimeoutInMilliseconds="5000"/>
+                <recipientList id="_userservice">
+                    <!--                     <simple>http://fisuser-service-cicddemo.app.rhdp.ocp.cloud.lab.eng.bos.redhat.com/cicd/user/profile/${header.acctid}?bridgeEndpoint=true</simple> -->
+                    <simple>http://fisuser-service/cicd/user/profile/${header.acctid}?bridgeEndpoint=true</simple>
+                </recipientList>
+                <convertBodyTo id="_convertBodyTo1" type="java.lang.String"/>
+                <unmarshal id="_unmarshal1">
+                    <json library="Jackson"/>
+                </unmarshal>
+                <setBody id="_setBody1">
+                    <simple>{"alertType":"${header.alerttype}","firstName":"${body['firstName']}","phone":"${body['phone']}","addr":"${body['addr']}","lastName":"${body['lastName']}","email":"${body['email']}"}</simple>
+                </setBody>
+                <setHeader headerName="CamelHttpMethod" id="_setHeader3">
+                    <constant>POST</constant>
+                </setHeader>
+                <recipientList id="_alertservice">
+                    <!--                     <simple>http://fisalert-service-cicddemo.app.rhdp.ocp.cloud.lab.eng.bos.redhat.com/cicd/alert?bridgeEndpoint=true</simple> -->
+                    <simple>http://fisalert-service/cicd/alert?bridgeEndpoint=true</simple>
+                </recipientList>
+                <convertBodyTo id="_convertBodyTo2" type="java.lang.String"/>
+                <unmarshal id="_unmarshal2">
+                    <json library="Jackson"/>
+                </unmarshal>
+                <setBody id="_setBody02">
+                    <simple>Email status response :${body}</simple>
+                </setBody>
+                <onFallback id="_onFallback2">
+                    <to id="_handelerro01" uri="direct:doNoresponse"/>
+                </onFallback>
+            </hystrix>
+        </route>
+        <route id="noresponseroute">
+            <from id="noresponse" uri="direct:doNoresponse"/>
+            <log id="_log10" message="Fallback because backend services not responding"/>
+            <setHeader headerName="Exchange.HTTP_RESPONSE_CODE" id="_setHeader2">
+                <constant>503</constant>
+            </setHeader>
+            <setBody id="_setBody3">
+                <constant>"End Service not available try again later"</constant>
+            </setBody>
+        </route>
+    </camelContext>
+</beans>

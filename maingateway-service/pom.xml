@@ -2,17 +2,17 @@
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.redhat</groupId>
-  <artifactId>fisalert-service</artifactId>
+<groupId>com.redhat</groupId>
+  <artifactId>maingateway-service</artifactId>
   <version>1.0.0-SNAPSHOT</version>
-  <name>Fuse Integration Service :: Alert :: Message</name>
-  <description>Fuse Integration Service - Alert Service</description>
- <properties>
-    <spring-boot.version>1.5.4.RELEASE</spring-boot.version>
+ <name>Fuse Integration Service :: User :: Service</name>
+ <description>Fuse Integration Service - main gateway Service</description>
+<properties>
+    <spring-boot.version>1.4.1.RELEASE</spring-boot.version>
     <fabric8.version>2.2.170.redhat-000010</fabric8.version>
-    <maven-compiler-plugin.version>3.6.0</maven-compiler-plugin.version>
     <fabric8.maven.plugin.version>3.1.80.redhat-000010</fabric8.maven.plugin.version>
-    <run.profiles>dev</run.profiles>
+    <maven-compiler-plugin.version>3.6.0</maven-compiler-plugin.version>
+ 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
   </properties>
@@ -29,12 +29,16 @@
   </dependencyManagement>
   <dependencies>
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-actuator</artifactId>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-spring-boot-starter</artifactId>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
     </dependency>
     <dependency>
       <groupId>org.apache.camel</groupId>
@@ -49,20 +53,8 @@
       <artifactId>camel-swagger-java-starter</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.apache.activemq</groupId>
-      <artifactId>activemq-camel</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.activemq</groupId>
-      <artifactId>activemq-pool</artifactId>
-    </dependency>
-    <dependency>
       <groupId>org.apache.camel</groupId>
-      <artifactId>camel-spring-boot-starter</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.hibernate</groupId>
-      <artifactId>hibernate-validator</artifactId>
+      <artifactId>camel-http-starter</artifactId>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -70,23 +62,39 @@
       <scope>test</scope>
     </dependency>
     <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <!--  For Hystrix -->
+    <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-hystrix-starter</artifactId>
+	</dependency>
+	<dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-jsonpath-starter</artifactId>  
+    </dependency>
+    <!-- For Testing -->
+	<dependency>
+	    <groupId>org.apache.httpcomponents</groupId>
+	    <artifactId>httpclient</artifactId>
+	    <scope>test</scope>
+	</dependency>
+    
+    <dependency>
       <groupId>org.jboss.arquillian.junit</groupId>
       <artifactId>arquillian-junit-container</artifactId>
       <scope>test</scope>
     </dependency>
-     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-mail</artifactId>
-      <version>1.4.3.RELEASE</version>
-    </dependency>
     <dependency>
-      <groupId>org.apache.camel</groupId>
-      <artifactId>camel-mail</artifactId>
-      <version>2.21.0.fuse-710018-redhat-00001</version>
+      <groupId>io.fabric8</groupId>
+      <artifactId>fabric8-arquillian</artifactId>
+      <scope>test</scope>
     </dependency>
   </dependencies>
   <repositories>
-    <repository>
+  	<repository>
   	 	<id>jboss.ea</id>
   	 	<name>JBoss Early Adopter</name>
   	 	<url>https://maven.repository.redhat.com/earlyaccess/all</url>
@@ -105,7 +113,7 @@
      </repository>
   </repositories>
   <pluginRepositories>
-  	<pluginRepository>
+   <pluginRepository>
     	<id>jboss.ea</id>
     	<name>JBoss Early Adopter</name>
     	<url>https://maven.repository.redhat.com/earlyaccess/all</url>
@@ -124,12 +132,7 @@
         </pluginRepository>
   </pluginRepositories>
   <build>
-    <testResources>
-      <testResource>
-        <filtering>true</filtering>
-        <directory>src/test/resources</directory>
-      </testResource>
-    </testResources>
+    <defaultGoal>spring-boot:run</defaultGoal>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -142,7 +145,6 @@
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>${maven-surefire-plugin.version}</version>
-        <inherited>true</inherited>
         <configuration>
           <excludes>
             <exclude>**/*KT.java</exclude>

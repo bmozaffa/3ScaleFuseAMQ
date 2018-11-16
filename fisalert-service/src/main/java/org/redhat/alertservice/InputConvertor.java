@@ -24,7 +24,7 @@ public class InputConvertor implements Processor {
 		userInfo.setDescription((String) exchange.getIn().getHeader("description"));
 		userInfo.setEmail((String) exchange.getIn().getHeader("email"));
 		userInfo.setPhone((String) exchange.getIn().getHeader("phone"));
-		userInfo.setAlertType((String) exchange.getIn().getHeader("type"));
+		userInfo.setAlertType((String) exchange.getIn().getHeader("alertType"));
 		
 		System.out.println("userInfo"+userInfo);
 		 

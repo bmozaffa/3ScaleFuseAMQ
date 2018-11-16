@@ -39,6 +39,7 @@
             <setBody id="_setBody1">
                 <constant>{'status':'Alert Sent'}</constant>
             </setBody>
+         
         </route>
     </camelContext>
 </beans>
