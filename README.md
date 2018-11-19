@@ -1,9 +1,11 @@
 # 3ScaleFuseAMQ
 
 
+![alt text](images/image2.png "outline 2")
+
+
 ![alt text](images/outline.png "outline")
 
-![alt text](images/image2.png "outline 2")
 
 
 ### Building
