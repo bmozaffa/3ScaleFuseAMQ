@@ -45,7 +45,7 @@ I now want to automate deployment of this application across multiple environmen
 ## Application Environemnt
 
 This demo application contains 4 parts.
- - Gatway application 
+ - Gateway application 
  - User Service application
  - Alert Service Application
  - Node Js Web application.
