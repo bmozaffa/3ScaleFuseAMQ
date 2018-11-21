@@ -1,5 +1,19 @@
 # 3ScaleFuseAMQ
 
+
+## Demo Story
+
+I'm a developer that's created an integration application consisting of
+Multiple services working in combination (let's say single front end with dispatch to two back-ends)
+One or more APIs that need to be managed via 3scale
+One or more messaging destinations/addresses used for event-driven inputs and outputs
+I now want to automate deployment of this application across multiple environments using pre-defined pipelines provided by the platform.  The delivery pipelines must support environment-specific properties, testing, versioning, and the ability to rollback incomplete or failed deployments.
+
+![alt text](images/outline.png "outline")
+
+
+
+
 **Products and Projects**
 
 * OpenShift Container Platform
@@ -14,7 +28,7 @@
 ![alt text](images/image2.png "outline 2")
 
 
-![alt text](images/outline.png "outline")
+
 
 
 
@@ -27,6 +41,8 @@
 * Pubslish API on 3scale enviroment using CI/CD pipeline .
 * Manage the API through 3scale API management and update the application plan to rate-limit the application.
 * Design a web application which invokes the 3scale API gateway .
+
+
 
 #### Building
 The example can be built with
