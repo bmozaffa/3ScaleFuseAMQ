@@ -32,7 +32,7 @@ I now want to automate deployment of this application across multiple environmen
 
 
 
-## Demo Objectives
+ Steps
 
 * Design a application which integrated with Fuse , AMQ , 3Scale .
 * Source to Image (S2i) build and deploy apps on openshift enviroment. 
