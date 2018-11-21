@@ -42,6 +42,15 @@ I now want to automate deployment of this application across multiple environmen
 * Manage the API through 3scale API management and update the application plan to rate-limit the application.
 * Design a web application which invokes the 3scale API gateway .
 
+## Application Environemnt
+
+This demo application contains 4 parts.
+ - Gatway application 
+ - User Service application
+ - Alert Service Application
+ - Node Js Web application.
+ 
+
 
 
 #### Building
