@@ -1,5 +1,15 @@
 # 3ScaleFuseAMQ
 
+**Products and Projects**
+
+* OpenShift Container Platform
+* Red Hat 3scale API Management
+* Red Hat Fuse
+* MySQl Database
+* Red Hat AMQ
+* Node JS (RHOAR) Web Application 
+* Jenkins CICD
+
 
 ![alt text](images/image2.png "outline 2")
 
@@ -8,8 +18,10 @@
 
 
 
-### Building
 
+
+
+#### Building
 The example can be built with
 
     mvn clean install
