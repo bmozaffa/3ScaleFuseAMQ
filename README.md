@@ -18,8 +18,15 @@
 
 
 
+## Demo Objectives
 
-
+* Design a application which integrated with Fuse , AMQ , 3Scale .
+* Source to Image (S2i) build and deploy apps on openshift enviroment. 
+* Building a pipeline to support automated CI/CD
+* Exposing a REST API using Camel, and export API doc to swagger
+* Pubslish API on 3scale enviroment using CI/CD pipeline .
+* Manage the API through 3scale API management and update the application plan to rate-limit the application.
+* Design a web application which invokes the 3scale API gateway .
 
 #### Building
 The example can be built with
