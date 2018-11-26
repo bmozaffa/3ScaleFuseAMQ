@@ -44,7 +44,7 @@ I now want to automate deployment of this application across multiple environmen
 
 ## Application Environemnt
 
-This demo contains 4 application.
+This demo contains below application.
  - Gateway application 
     https://github.com/redhatHameed/3ScaleFuseAMQ/tree/master/maingateway-service
     
