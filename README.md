@@ -39,11 +39,10 @@ An integration application consisting of Multiple services working in combinatio
 
 This demo contains below applications.
 
-    • Gateway application https://github.com/redhatHameed/3ScaleFuseAMQ/tree/master/maingateway-service
+    • Gateway application https://github.com/redhatHameed/3ScaleFuseAMQ/tree/master/maingateway-service 
     • User Service application https://github.com/redhatHameed/3ScaleFuseAMQ/tree/master/fisuser-service
     • Alert Service Application https://github.com/redhatHameed/3ScaleFuseAMQ/tree/master/fisalert-service
-    • Node.js Web application
-    • https://github.com/redhatHameed/3ScaleFuseAMQ/tree/master/nodejsalert-ui
+    • Node.js Web application https://github.com/redhatHameed/3ScaleFuseAMQ/tree/master/nodejsalert-ui
     • 3scale (Openshift on-premises) environment
 
 ### Automation of Applications in OpenShift.
