@@ -46,11 +46,16 @@ I now want to automate deployment of this application across multiple environmen
 
 This demo application contains 4 parts.
  - Gateway application 
+    https://github.com/redhatHameed/3ScaleFuseAMQ/tree/master/maingateway-service
+    
  - User Service application
+    https://github.com/redhatHameed/3ScaleFuseAMQ/tree/master/fisuser-service
+    
  - Alert Service Application
- - Node Js Web application.
- 
-
+    https://github.com/redhatHameed/3ScaleFuseAMQ/tree/master/fisalert-service
+    
+ - Node Js Web application  
+    https://github.com/redhatHameed/3ScaleFuseAMQ/tree/master/nodejsalert-ui
 
 
 #### Building
