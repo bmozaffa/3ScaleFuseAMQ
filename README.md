@@ -50,10 +50,10 @@ This demo contains below applications.
 TODO: -The below deployment will be achieved using Jenkins Pipelines CICD approach.
 
      • Deploying application to DEV Environment.
-     • Deploying application from development to UAT Environment. 	 	
-     • Deploying application in Production Environment.
-     • Deploying application to Production DR Environment.
-     • Publishing API’s in  3scale : (By using Operator or ansible playbooks).
+     • Deploying application from DEV to UAT Environment. 	 	
+     • Deploying application in Prod Environment.
+     • Deploying application to Prod DR Environment.
+     • Publishing API’s in 3scale : (By using Operator or ansible playbooks).
 
 
 
