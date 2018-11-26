@@ -44,7 +44,7 @@ I now want to automate deployment of this application across multiple environmen
 
 ## Application Environemnt
 
-This demo application contains 4 parts.
+This demo contains 4 application.
  - Gateway application 
     https://github.com/redhatHameed/3ScaleFuseAMQ/tree/master/maingateway-service
     
@@ -57,7 +57,7 @@ This demo application contains 4 parts.
  - Node Js Web application  
     https://github.com/redhatHameed/3ScaleFuseAMQ/tree/master/nodejsalert-ui
 
-
+ - 3scale (Open shift on-premises) environment 
 
 ### Setting up Environemnt in OpenShift
 
