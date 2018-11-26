@@ -75,5 +75,5 @@ TODO:
 
 -Setting Up Production Environment .
 
--Setting up 3scale API Management: (By using Operator or ansible playbooks)
+-Setting up 3scale API Management in 3sacle : (By using Operator or ansible playbooks)
 
