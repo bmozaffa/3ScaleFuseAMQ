@@ -22,7 +22,7 @@ I now want to automate deployment of this application across multiple environmen
 * MySQl Database
 * Red Hat AMQ
 * Node JS (RHOAR) Web Application 
-* Jenkins CICD
+* Jenkins for CICD
 
 
 ![alt text](images/image2.png "outline 2")
