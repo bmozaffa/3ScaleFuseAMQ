@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script>
+    function Edit(id) {
+        window.location.href = "/userEdit?id=" + id;
+    }
+
+    function Alert(id) {
+
+
+      var e = document.getElementById("alerttype");
+      var alertType = e.options[e.selectedIndex].value;
+
+        //var rs = confirm('Confirm to delete?');
+        //if (rs) {
+            window.location.href = "/userAlert?id=" + id + "&alertType=" + alertType;
+        //}
+    }
+
+    function Search() {
+
+        var userid = document.getElementsByName('suserid')[0].value;
+        window.location.href = "/?user=" + userid;;
+    }
+    </script>
+</head>
+
+<body>
+    <h1>CICD Demo - Users - List</h1>
+    <div class="search">
+        <label>UserId：</label>
+        <input type="text" name="suserid" value="<%=user  %>" placeholder="input the userid">
+        <input type="button" name="sSearch" value="Search" class="btn" onclick="Search();">
+    </div>
+<div class="dropdown">
+     <div class="select">
+        <label>
+
+        	<span>Alert Type:</span>
+        	<select name="alerttype" id="alerttype" style="width: 200px;">
+        		<option value="accident">Accident</option>
+            <option value="weather">Weather</option>
+        		<option value="mailbox">Mailbox</option>
+            <option value="appointment">Appointment</option>
+            <option value="transcation">Transcation</option>
+            <option value="advertisement">Advertisement</option>
+          </select>
+        </label>
+
+</div>
+
+    </div>
+    <div class="control">
+        <input class="btn" type='submit' value='Add' onclick="javascript: location.href='add'">
+    </div>
+    <table class="table">
+        <tr>
+            <th>id</th>
+            <th>firstName</th>
+            <th>lastName</th>
+            <th>email</th>
+            <th>phone</th>
+        </tr>
+        <% for ( var i = 0 ; i < data.length ; i++){ %>
+            <tr>
+                <td>
+                    <%= data[i].id  %>
+                </td>
+                <td>
+                    <%= data[i].firstName  %>
+
+                </td>
+                <td>
+                    <%= data[i].lastName  %>
+                </td>
+                <td>
+                    <%= data[i].email  %>
+                </td>
+                <td>
+                    <%= data[i].phone  %>
+                </td>
+                <td>
+                    <input type="button" name="edit" value="Edit" class="btn" onclick="Edit('<%= data[i].id  %>');" />
+                    <input type="button" name="alert" value="Send Alert" class="btn" onclick="Alert('<%= data[i].id  %>');" />
+                </td>
+            </tr>
+            <% } %>
+    </table>
+</body>
+
+</html>
