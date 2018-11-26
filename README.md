@@ -65,11 +65,15 @@ This demo application contains 4 parts.
 CI/CD  integration solution
 
 TODO: 
--The below deployment will be achieved using Jenkins Piplines by using CICD approach . 
+-The below deployment will be achieved using Jenkins Piplines  using CICD approach . 
 
--Setting up DEV .
+-Setting up DEV Environemnt .
+
 -Setting up UAT Environemnt .
+
 -Deploying up web application .
+
 -Setting Up Production Environment .
+
 -Setting up 3scale API Management: (By using Operator or ansible playbooks)
 
