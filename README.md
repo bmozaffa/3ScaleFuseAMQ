@@ -46,7 +46,7 @@ This demo contains below applications.
     • https://github.com/redhatHameed/3ScaleFuseAMQ/tree/master/nodejsalert-ui
     • 3scale (Openshift on-premises) environment
 
-### Jenkins Deplyoment  Applications in OpenShift.
+### Automation of Applications in OpenShift.
 
 TODO: -The below deployment will be achieved using Jenkins Pipelines CICD approach.
 
