@@ -65,7 +65,7 @@ This demo application contains 4 parts.
 CI/CD  integration using Jenkins Pipline Approach
 
 TODO: 
--The below deployment will be achieved using Jenkins Piplines  using CICD approach . 
+-The below deployment will be achieved using Jenkins Piplines CICD approach . 
 
 -Setting up DEV Environemnt .
 
