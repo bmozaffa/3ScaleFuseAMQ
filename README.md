@@ -63,7 +63,18 @@ The example can be built with
 
     mvn clean install
 
-### Running the example in OpenShift
+### Setting up Environemnt OpenShift
+
+
+CI/CD  integration solution
+
+TODO: The below deployment will be achieved using Jenkins Piplines by using CICD approach  
+Setting up DEV 
+Setting up UAT Environemnt
+Deploying up web application
+Setting Up Production Environment
+Setting up 3scale API Management: (By using Operator or ansible playbooks)
+
 
 It is assumed that:
 - OpenShift platform is already running, if not you can find details how to [Install OpenShift at your site](https://docs.openshift.com/container-platform/3.3/install_config/index.html).
