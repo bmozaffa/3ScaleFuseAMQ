@@ -59,10 +59,10 @@ This demo application contains 4 parts.
 
 
 
-### Setting up Environemnt OpenShift
+### Setting up Environemnt in OpenShift
 
 
-CI/CD  integration solution
+CI/CD  integration using Jenkins Pipline Approach
 
 TODO: 
 -The below deployment will be achieved using Jenkins Piplines  using CICD approach . 
