@@ -1,9 +1,25 @@
-# Spring-Boot Camel QuickStart
+# API Gateway Service
 
-This example demonstrates how you can use Apache Camel with Spring Boot.
 
-The quickstart uses Spring Boot to configure a little application that includes a Camel route that triggers a message every 5th second, and routes the message to a log.
+This demo demonstrates how to use SQL via JDBC along with Camel's REST DSL to expose a RESTful API.
 
+This example relies on the Fabric8 Maven plugin for its build configuration and uses the FIS Java base image
+
+
+
+## Background
+
+
+
+This is a Fuse Service that use SQl commponent to connects to a table in database, that reterieve particular user Profile By providing the profile id and return out as a jason format.
+
+  ![alt text](../images/service3.png "Gateway Service")
+
+
+
+### Building
+
+The example can be built with
 ### Building
 
 The example can be built with
