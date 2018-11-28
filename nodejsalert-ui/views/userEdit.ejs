@@ -24,16 +24,38 @@
 
 <body>
     <form name="editform" action="userEdit" method="post" accept-charset="utf-8" onSubmit="return Check();">
-        <h1>Account - Edit</h1>
+        <h1>User - Edit</h1>
         <input type="hidden" name="id" value="<%=data[0].id  %>" />
         <div class="row">
             <label>userid：</label>
-            <input type="text" name="userid" placeholder="userid" value="<%=data[0].userid %>" readonly  />
+            <input type="text" name="userid" placeholder="userid" value="<%=data[0].id %>" readonly  />
         </div>
         <div class="row">
-            <label>password：</label>
-            <input type="text" name="password" placeholder="password" value="<%=data[0].password  %>" />
+            <label>First Name：</label>
+            <input type="text" name="firstName" placeholder="firstName" value="<%=data[0].firstName  %>" />
         </div>
+
+        <div class="row">
+            <label>Last Name：</label>
+            <input type="text" name="lastName" placeholder="lastName" value="<%=data[0].lastName  %>" />
+        </div>
+
+
+
+
+        <div class="row">
+            <label>Phone No：</label>
+            <input type="text" name="phone" placeholder="phone" value="<%=data[0].phone  %>" />
+        </div>
+
+
+        <div class="row">
+            <label>Address：</label>
+            <input type="text" name="addr" placeholder="addr" value="<%=data[0].addr  %>" />
+        </div>
+
+
+
         <div class="row">
             <label>email：</label>
             <input type="text" name="email" placeholder="email" value="<%=data[0].email  %>">

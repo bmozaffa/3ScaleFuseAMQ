@@ -5,7 +5,7 @@ const app = require('../app');
 
 test('test out greeting route with no query param', t => {
   supertest(app)
-    .get('/api/greeting')
+    .get('/')
     .expect('Content-Type', /json/)
     .expect(200)
     .then(response => {
@@ -16,7 +16,7 @@ test('test out greeting route with no query param', t => {
 
 test('test out greeting route with a query param', t => {
   supertest(app)
-    .get('/api/greeting?name=Luke')
+    .get('/')
     .expect('Content-Type', /json/)
     .expect(200)
     .then(response => {

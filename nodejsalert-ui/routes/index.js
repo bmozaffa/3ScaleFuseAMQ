@@ -7,7 +7,8 @@ router.get('/', function(req, res, next) {
 
     var db = req.con;
     var data = "";
-
+    var url = req.config.threescale.url;
+    var token=req.config.threescale.token;
     var user = "";
     var user = req.query.user;
 
@@ -24,7 +25,7 @@ router.get('/', function(req, res, next) {
         var data = rows;
 
         // use index.ejs
-        res.render('index', { title: 'userprofile Information', data: data, user: user });
+        res.render('index', { title: 'CICD Demo', data: data, user: user, url:url , token:token });
     });
 
 });
@@ -109,9 +110,14 @@ router.post('/userEdit', function(req, res, next) {
     var id = req.body.id;
 
     var sql = {
-        userid: req.body.userid,
-        password: req.body.password,
-        email: req.body.email
+      id: req.body.id,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      phone: req.body.phone,
+      addr: req.body.addr,
+      state: req.body.state,
+      email: req.body.email,
+      username: 'rusername'
     };
 
     var qur = db.query('UPDATE userprofile SET ? WHERE id = ?', [sql, id], function(err, rows) {
@@ -137,7 +143,7 @@ router.get('/userAlert', function(req, res, next) {
 
     request(url, function (error, response, body) {
       if (!error && response.statusCode == 200) {
-        
+
         console.log(body) // Show the HTML for the Google homepage.
           res.redirect('/');
       }

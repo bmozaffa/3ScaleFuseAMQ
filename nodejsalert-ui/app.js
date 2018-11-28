@@ -8,14 +8,20 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
+var env = process.env.NODE_ENV || 'production';
+var config = require('./config')[env];
+
+
+
+
 // DataBase
 var mysql = require("mysql");
 
 var con = mysql.createConnection({
-    host: "mysql",
-    user: "dbuser",
-    password: "password",
-    database: "sampledb"
+    host: config.database.host,
+    user: config.database.user,
+    password: config.database.password,
+    database: config.database.database
 });
 
 con.connect(function(err) {
@@ -32,6 +38,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -43,6 +50,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // db state
 app.use(function(req, res, next) {
     req.con = con;
+    req.config=config;
     next();
 });
 

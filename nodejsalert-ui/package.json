@@ -1,5 +1,5 @@
 {
-  "name": "nodejstest",
+  "name": "nodejsalert-ui",
   "version": "1.0.0-SNAPSHOT",
   "author": "Red Hat, Inc.",
   "license": "Apache-2.0",
@@ -42,6 +42,7 @@
   "files": [
     "package.json",
     "app.js",
+    "config.js",
     "public",
     "routes",
     "views",
@@ -82,6 +83,7 @@
     "express-fileupload": "^0.4.0",
     "req-flash": "0.0.3",
     "request": "~2.33.0",
+    "config": "^1.30.0",
     "serve-favicon": "~2.3.0"
   }
 }
