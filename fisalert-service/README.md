@@ -8,7 +8,7 @@ In this example we will use two containers, one container to run as a ActiveMQ b
 ### Backgorund
 
 
-This demo is a simple service which sent email alert and exposes an API endpoints,to send a alert by recieving input as a jason post request parameters. These content is later sent to a messaging broker, and then picked up by a bean, which simply returns a result of the email status. 
+This demo is a simple service which sent email alert and exposes an API endpoints,to send a alert by recieving input as a jason post request parameters. These content is later sent to a messaging broker, and then picked up by a bean, which simply process email paramets and returns a result of the email status. 
 
 
   ![alt text](../images/Service2.png "Fuse Service 2")
