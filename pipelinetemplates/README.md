@@ -1,4 +1,4 @@
 # IntegrationApp Automation
 
 
-##Install all three pipelines
+##Install step of all piplines -
