@@ -1,6 +1,6 @@
 
 # back-end Service 1
-# Using Spring-Boot Fuse/Camel Sample 
+# User Profile Service
 
 This demo demonstrates how to use SQL via JDBC along with Camel's REST DSL to expose a RESTful API.
 

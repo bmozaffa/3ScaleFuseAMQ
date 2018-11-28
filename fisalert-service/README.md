@@ -1,14 +1,26 @@
-# Spring-Boot Camel QuickStart
+# back-end Service 2
+## user Alert Service
 
-This example demonstrates how you can use Apache Camel with Spring Boot.
+This demo demonstrates how to integrate a Spring-Boot application to an ActiveMQ broker and use JMS messaging between two Camel routes using OpenShift.
 
-The quickstart uses Spring Boot to configure a little application that includes a Camel route that triggers a message every 5th second, and routes the message to a log.
+In this example we will use two containers, one container to run as a ActiveMQ broker, and another as a client to the broker, where the Camel routes is running.
+
+### Backgorund
+
+
+This demo is a simple service which sent email alert, which exposes a API endpoints,to send a email alert an a input Jason post request parameters. These content is later sent to a messaging broker, and then picked up by a bean, which simply returns result of the email status. 
 
 ### Building
 
 The example can be built with
 
     mvn clean install
+
+### Running the example locally
+
+The example can be run locally using the following Maven goal:
+
+    mvn spring-boot:run
 
 ### Running the example in OpenShift
 

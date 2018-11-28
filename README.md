@@ -35,7 +35,7 @@ An integration application consisting of Multiple services working in combinatio
      • Manage the API through 3scale API management and update the application plan to rate-limit the application.
      • Design a web application that invokes the 3scale API gateway .
 
-## Application Environemnt
+## Application Environment
 
 This demo contains below applications.
 
