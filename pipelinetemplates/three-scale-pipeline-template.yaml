@@ -1,0 +1,179 @@
+apiVersion: template.openshift.io/v1
+kind: Template
+labels:
+  template: pipeline-integration
+metadata:
+  annotations:
+    description: Demo Deployment Pipeline
+  name: pipeline-integration
+objects:
+- apiVersion: v1
+  kind: BuildConfig
+  metadata:
+    labels:
+      name: pipeline-integration
+    name: pipeline-integration
+  spec:
+    output: null
+    postCommit: null
+    resources: null
+    runPolicy: Serial
+    source:
+      type: None
+    source:
+      git:
+        uri: ${GIT_REPO}
+        ref: ${GIT_BRANCH}
+    strategy:
+      type: JenkinsPipeline
+      jenkinsPipelineStrategy:
+        jenkinsfilePath: Jenkinsfile
+        env:
+        - name: GIT_BRANCH
+          value: ${GIT_BRANCH}
+        - name: GIT_REPO
+          value: ${GIT_REPO}
+        - name: ANSIBLE_TEST_INVENTORY
+          value: ${ANSIBLE_TEST_INVENTORY}
+        - name: ANSIBLE_PROD_INVENTORY
+          value: ${ANSIBLE_PROD_INVENTORY}
+        - name: ANSIBLE_JOB_TEMPLATE
+          value: ${ANSIBLE_JOB_TEMPLATE}
+        - name: ANSIBLE_TOWER_SERVER
+          value: ${ANSIBLE_TOWER_SERVER}
+        - name: OPENSHIFT_SERVICE_NAME
+          value: ${OPENSHIFT_SERVICE_NAME}
+        - name: OPENSHIFT_IMAGE_STREAM
+          value: ${OPENSHIFT_IMAGE_STREAM}
+        - name: OPENSHIFT_BUILD_CONFIG
+          value: ${OPENSHIFT_BUILD_CONFIG}
+        - name: OPENSHIFT_BUILD_PROJECT
+          value: ${OPENSHIFT_BUILD_PROJECT}
+        - name: OPENSHIFT_TEST_ENVIRONMENT
+          value: ${OPENSHIFT_TEST_ENVIRONMENT}
+        - name: OPENSHIFT_PROD_ENVIRONMENT
+          value: ${OPENSHIFT_PROD_ENVIRONMENT}
+        - name: OPENSHIFT_DEPLOYMENT_CONFIG
+          value: ${OPENSHIFT_DEPLOYMENT_CONFIG}
+        - name: THREESCALE_URL
+          value: ${THREESCALE_URL}
+        - name: API_TOKEN
+          value: ${API_TOKEN}
+        - name: WILDCARD_DOMAIN
+          value: ${WILDCARD_DOMAIN}
+        - name: MAJOR_VERSION
+          value: ${MAJOR_VERSION}
+        - name: API_URL
+          value: ${API_URL}
+        - name: SWAGGER_FILE_NAME
+          value: ${SWAGGER_FILE_NAME}
+        - name: ANSIBLE_SMOKE_TEST_OPREATION
+          value: ${ANSIBLE_SMOKE_TEST_OPREATION}
+        - name: API_CAST_ROUTE_TEMPLATE_FILE
+          value: ${API_CAST_ROUTE_TEMPLATE_FILE}
+        - name: THREESCALE_OPENSHIFT_PROJECT
+          value: ${THREESCALE_OPENSHIFT_PROJECT}
+
+parameters:
+- name: GIT_REPO
+  value: https://github.com/redhatHameed/3ScaleFuseAMQ.git
+  required: true
+- name: GIT_BRANCH
+  value: master
+  required: true
+- name: API_URL
+  value: fisgateway-service-fisdemoprod.master.rhdp.ocp.cloud.lab.eng.bos.redhat.com:80
+  required: true
+- name: WILDCARD_DOMAIN
+  displayName: Threescale cicd wildcard domain
+  required: true
+  value: app.rhdp.ocp.cloud.lab.eng.bos.redhat.com
+  description: Threescale cicd wildcard domain to generate API cast route
+- name: MAJOR_VERSION
+  displayName: Threescale API CAST Major Version
+  required: true
+  value: "1"
+  description: Threescale API Cast version
+- name: SWAGGER_FILE_NAME
+  displayName: SWAGGER_FILE_NAME
+  required: true
+  value: openapi-spec.yaml
+  description: SWAGGER_FILE_NAME for 3Scale env
+- name: ANSIBLE_TEST_INVENTORY
+  value: 3scaleFuse-test
+  required: true
+- name: ANSIBLE_PROD_INVENTORY
+  value: 3scaleFuse-prod
+  required: true
+- name: ANSIBLE_JOB_TEMPLATE
+  value: Deploy an API to 3scaleFuse
+  required: true
+- name: ANSIBLE_TOWER_SERVER
+  value: tower
+  required: true
+- name: ANSIBLE_SMOKE_TEST_OPREATION
+  value: route3
+  required: true
+- name: OPENSHIFT_SERVICE_NAME
+  value: 3scalefuse
+  required: true
+- name: OPENSHIFT_IMAGE_STREAM
+  value: 3scaleFuse
+  required: true
+- name: OPENSHIFT_BUILD_CONFIG
+  value: 3scaleFuse
+  required: true
+- name: OPENSHIFT_BUILD_PROJECT
+  value: rhte-build
+  required: true
+- name: OPENSHIFT_TEST_ENVIRONMENT
+  value: fisdemo
+  required: true
+- name: OPENSHIFT_PROD_ENVIRONMENT
+  value: fisdemoprod
+  required: true
+- name: OPENSHIFT_DEPLOYMENT_CONFIG
+  value: 3scaleFuse
+  required: true
+- name: MICROCKS_SERVER_URL
+  value: http://microcks:8080/api
+  required: true
+- name: THREESCALE_URL
+  displayName: Admin URL of Threescale
+  required: true
+  value: https://ah-3scale-ansible-admin.app.rhdp.ocp.cloud.lab.eng.bos.redhat.com
+  description: Admin URL of Threescale
+- name: API_TOKEN
+  displayName: Access token from 3scale 
+  required: true
+  value: 845927b93be20fa491bf5601cc5e7fafa11d9d7eea8d70e7e46a79d35eab0aa2
+  description: Access token from 3scale for calling management API
+- name: API_CAST_ROUTE_TEMPLATE_FILE
+  displayName: API_CAST_ROUTE_TEMPLATE_FILE 
+  required: true
+  value: https://raw.githubusercontent.com/redhatHameed/fuse-financial-cicd/master/apicast-routes-template.yaml
+  description: apicast route template file used to create the routes
+- name: THREESCALE_OPENSHIFT_PROJECT
+  displayName: The Name of API CAST Gateway Project or 3scale project name deployed on Openshift to create the routes
+  required: true
+  value: ah-3scale-ansible
+  description: apicast route template file used to create the routes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
