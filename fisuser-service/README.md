@@ -46,7 +46,7 @@ It is assumed that:
 
 The example can be built and run on OpenShift using a single goal:
 
-    mvn fabric8:deploy
+   mvn fabric8:deploy -Dmysql-service-username=dbuser -Dmysql-service-password=password
 
 When the example runs in OpenShift, you can use the OpenShift client tool to inspect the status
 
