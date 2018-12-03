@@ -2,7 +2,7 @@ podTemplate(
     inheritFrom: "maven", 
     label: "myJenkins", 
     cloud: "openshift", 
-    {
+    ) {
 
     node("myJenkins") {
 
