@@ -15,9 +15,11 @@ podTemplate(
     
         stage ('Maven build'){
             
-            sh "cd maingateway-service && pwd"
+            sh '''  
+                    ls -last 
+                '''
             echo 'Building project'
-            sh "mvn repackage"
+            sh "mvn package"
         }
     
         stage ('DEV - Image build'){
