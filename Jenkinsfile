@@ -14,13 +14,14 @@ podTemplate(
         }
     
         stage ('Maven build'){
-            
+            echo 'Building project'
             sh '''  
                     ls -last 
                     cd maingateway-service
+                    mvn package
                 '''
-            echo 'Building project'
-            sh "mvn package"
+            
+            
         }
     
         stage ('DEV - Image build'){
