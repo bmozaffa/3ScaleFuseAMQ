@@ -1,39 +1,52 @@
-import groovy.json.JsonOutput
+podTemplate(
+    inheritFrom: "maven", 
+    label: "myJenkins", 
+    cloud: "openshift", 
+    {
 
-def gitRepo = params.GIT_REPO
-def gitBranch = params.GIT_BRANCH != null && params.GIT_BRANCH != "" ? params.GIT_BRANCH : "master"
+    node("myJenkins") {
 
-node('nodejs') {
-  // Get Source Code from SCM (Git) as configured in the Jenkins Project
-  stage('Checkout Source') {
-    // For Jenkinsfile from GIT
-    checkout scm
-    // for inline scripts
-    //git url: gitRepo, branch: gitBranch
-  }
-     
-     
-        stage("Compile") {
-            
-                sh "cd fisuser-service"
-                sh "mvn clean package -DskipTests "
-                sh "cd .."
-                
-                
-                sh "cd fisalert-service"
-                sh "mvn clean package -DskipTests "
-                sh "cd .."        
-                
-                sh "cd fisuser-service"
-                sh "mvn clean package -DskipTests "
+        @Library('github.com/redhat-helloworld-msa/jenkins-library@master') _
         
-                
-            }
+        stage ('SCM checkout'){
+            echo 'Checking out git repository'
+            checkout scm
+        }
+    
+        stage ('Maven build'){
+            echo 'Building project'
+            sh "mvn package"
+        }
+    
+        stage ('DEV - Image build'){
+            echo 'Building docker image and deploying to Dev'
+            buildApp('helloworld-msa-dev', "aloha")
+            echo "This is the build number: ${env.BUILD_NUMBER}"
+        }
+    
+        stage ('Automated tests'){
+            echo 'This stage simulates automated tests'
+            sh "mvn -B -Dmaven.test.failure.ignore test"
+        }
+    
+        stage ('QA - Promote image'){
+            echo 'Deploying to QA'
+            promoteImage('helloworld-msa-dev', 'helloworld-msa-qa', 'aloha', 'latest')
+        }
+    
+        stage ('Wait for approval'){
+            input 'Approve to production?'
+        }
+    
+        stage ('PRD - Promote image'){
+            echo 'Deploying to production'
+            promoteImage('helloworld-msa-qa', 'helloworld-msa', 'aloha', env.BUILD_NUMBER)
+        }
 
-            stage("Test") {
-                sh "mvn test"
-            }
-            
-            
+        stage ('PRD - Canary Deploy'){
+            echo 'Performing a canary deployment'
+            canaryDeploy('helloworld-msa', 'aloha', env.BUILD_NUMBER)
+        }
 
+    }
 }
