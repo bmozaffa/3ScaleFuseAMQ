@@ -14,16 +14,15 @@ podTemplate(
         }
     
         stage ('Maven build'){
-             sh '''  
-                    ls -last 
-                '''
+            
+            sh "cd maingateway-service && pwd"
             echo 'Building project'
             sh "mvn package"
         }
     
         stage ('DEV - Image build'){
             echo 'Building docker image and deploying to Dev'
-            buildApp('helloworld-msa-dev', "aloha")
+            buildApp('rh-dev', "maingateway-service")
             echo "This is the build number: ${env.BUILD_NUMBER}"
         }
     
