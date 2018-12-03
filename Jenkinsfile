@@ -61,7 +61,7 @@ podTemplate(
 def buildApp(project, app){
     projectSet(project)
     sh ''' 
-    
+    cd maingateway-service
     ls -last 
     oc new-build -n ${project} --binary --name=${app} -l app=${app} || echo 'Build exists'
     oc start-build ${app} -n ${project} --from-dir=. --follow
