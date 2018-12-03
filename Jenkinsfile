@@ -17,6 +17,7 @@ podTemplate(
             
             sh '''  
                     ls -last 
+                    cd maingateway-service
                 '''
             echo 'Building project'
             sh "mvn package"
