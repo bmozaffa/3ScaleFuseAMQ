@@ -14,6 +14,9 @@ podTemplate(
         }
     
         stage ('Maven build'){
+             sh '''  
+                    ls -last 
+                '''
             echo 'Building project'
             sh "mvn package"
         }
