@@ -12,12 +12,12 @@ def version, mvnCmd = "mvn"
                   def pom = readMavenPom file: 'maingateway-service/pom.xml'
                   version = pom.version
               }
-              sh "cd maingateway-service && ${mvnCmd} install -DskipTests=true"
+              sh "cd maingateway-service && ${mvnCmd} package "
             }
           }
           stage('Test') {
             steps {
-              sh "${mvnCmd} test"
+              sh "cd maingateway-service && ${mvnCmd} test"
               step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
             }
           }
