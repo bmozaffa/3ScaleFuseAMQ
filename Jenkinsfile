@@ -52,7 +52,7 @@ def version, mvnCmd = "mvn"
               script {
                 openshift.withCluster() {
                   openshift.withProject(env.DEV_PROJECT) {
-                    openshift.selector("bc", "maingateway-service").startBuild("--from-dir=./maingateway-service/ocp","--follow", "--wait=true")
+                    openshift.selector("bc", "maingateway-service").startBuild("--from-dir=./maingateway-service/ocp","--follow==true", "--wait=true")
                   }
                 }
               }
