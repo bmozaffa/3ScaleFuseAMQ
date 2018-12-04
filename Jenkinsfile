@@ -52,7 +52,7 @@ def version, mvnCmd = "mvn"
               script {
                 openshift.withCluster() {
                   openshift.withProject(env.DEV_PROJECT) {
-                    openshift.selector("bc", "maingateway-service").startBuild("--from-dir=./ocp","--follow", "--wait=true")
+                    openshift.selector("bc", "maingateway-service").startBuild("--from-dir=./maingateway-service/ocp","--follow", "--wait=true")
                   }
                 }
               }
@@ -76,14 +76,14 @@ def version, mvnCmd = "mvn"
                     app.narrow("svc").expose();
 
                     //http://localhost:8080/actuator/health
-                    openshift.set("probe dc/bookstore --readiness --get-url=http://:8080/actuator/health --initial-delay-seconds=30 --failure-threshold=10 --period-seconds=10")
-                    openshift.set("probe dc/bookstore --liveness  --get-url=http://:8080/actuator/health --initial-delay-seconds=180 --failure-threshold=10 --period-seconds=10")
+                    openshift.set("probe dc/maingateway-service --readiness --get-url=http://:8080/actuator/health --initial-delay-seconds=30 --failure-threshold=10 --period-seconds=10")
+                    openshift.set("probe dc/maingateway-service --liveness  --get-url=http://:8080/actuator/health --initial-delay-seconds=180 --failure-threshold=10 --period-seconds=10")
 
-                    def dc = openshift.selector("dc", "bookstore")
+                    def dc = openshift.selector("dc", "maingateway-service")
                     while (dc.object().spec.replicas != dc.object().status.availableReplicas) {
                         sleep 10
                     }
-                    openshift.set("triggers", "dc/bookstore", "--manual")
+                    openshift.set("triggers", "dc/maingateway-service", "--manual")
                   }
                 }
               }
