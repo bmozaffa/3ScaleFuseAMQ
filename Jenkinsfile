@@ -45,9 +45,9 @@ def version, mvnCmd = "mvn"
           }
           stage('Build Image') {
             steps {
-              sh "rm -rf ocp && mkdir -p ocp/deployments"
-              sh "pwd && ls -la target "
-              sh "cp target/bookstore-*.jar ocp/deployments"
+              sh "cd maingateway-service && rm -rf ocp && mkdir -p ocp/deployments"
+              sh "cd maingateway-service && pwd && ls -la target "
+              sh "cd maingateway-service && cp target/bookstore-*.jar ocp/deployments"
 
               script {
                 openshift.withCluster() {
