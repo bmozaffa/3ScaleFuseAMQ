@@ -12,7 +12,7 @@ def version, mvnCmd = "mvn fabric8:deploy"
                   def pom = readMavenPom file: 'maingateway-service/pom.xml'
                   version = pom.version
               }
-              sh "${mvnCmd} install -DskipTests=true"
+              sh "cd maingateway-service && ${mvnCmd} install -DskipTests=true"
             }
           }
           stage('Test') {
