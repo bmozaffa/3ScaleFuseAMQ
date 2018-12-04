@@ -1,4 +1,4 @@
-def version, mvnCmd = "mvn fabric8:deploy"
+def version, mvnCmd = "mvn"
       pipeline {
         agent {
           label 'maven'
