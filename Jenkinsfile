@@ -47,7 +47,7 @@ def version, mvnCmd = "mvn"
             steps {
               sh "cd maingateway-service && rm -rf ocp && mkdir -p ocp/deployments"
               sh "cd maingateway-service && pwd && ls -la target "
-              sh "cd maingateway-service && cp target/bookstore-*.jar ocp/deployments"
+              sh "cd maingateway-service && cp target/maingateway-*.jar ocp/deployments"
 
               script {
                 openshift.withCluster() {
