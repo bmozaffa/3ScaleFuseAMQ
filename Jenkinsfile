@@ -15,12 +15,12 @@ def version, mvnCmd = "mvn"
               sh "cd maingateway-service && ${mvnCmd} package "
             }
           }
-          stage('Test') {
+          /*stage('Test') {
             steps {
               sh "cd maingateway-service && ${mvnCmd} test"
               step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
             }
-          }
+          }*/
           
           stage('Create Image Builder') {
 
