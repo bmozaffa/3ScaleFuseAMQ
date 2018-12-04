@@ -1,99 +1,131 @@
-podTemplate(
-    inheritFrom: "maven", 
-    label: "myJenkins", 
-    cloud: "openshift", 
-    ) {
-
-    node("myJenkins") {
-
-        @Library('github.com/redhatHameed/jenkins-library@master') _
-        
-        stage ('SCM checkout'){
-            echo 'Checking out git repository'
-            checkout scm
+def version, mvnCmd = "mvn fabric8:deploy"
+      pipeline {
+        agent {
+          label 'maven'
         }
-    
-        stage ('Maven build'){
-            echo 'Building project'
-            sh '''  
-                    ls -last 
-                    cd maingateway-service
-                    mvn package
-                '''
-            
-            
+        stages {
+          stage('Build App') {
+            steps {
+              git branch: 'openshift', url: 'https://github.com/redhatHameed/3ScaleFuseAMQ.git'
+              script {
+                  def pom = readMavenPom file: '/maingateway-service/pom.xml'
+                  version = pom.version
+              }
+              sh "${mvnCmd} install -DskipTests=true"
+            }
+          }
+          stage('Test') {
+            steps {
+              sh "${mvnCmd} test"
+              step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
+            }
+          }
+          
+          stage('Create Image Builder') {
+
+            when {
+              expression {
+                openshift.withCluster() {
+                  openshift.withProject(env.DEV_PROJECT) {
+                    return !openshift.selector("bc", "maingateway-service").exists();
+                  }
+                }
+              }
+            }
+            steps {
+              script {
+                openshift.withCluster() {
+                  openshift.withProject() {
+                    openshift.newBuild("--name=maingateway-service", "--image-stream=redhat-openjdk18-openshift:1.3", "--binary=true")
+                  }
+                }
+              }
+            }
+          }
+          stage('Build Image') {
+            steps {
+              sh "rm -rf ocp && mkdir -p ocp/deployments"
+              sh "pwd && ls -la target "
+              sh "cp target/bookstore-*.jar ocp/deployments"
+
+              script {
+                openshift.withCluster() {
+                  openshift.withProject(env.DEV_PROJECT) {
+                    openshift.selector("bc", "maingateway-service").startBuild("--from-dir=./ocp","--follow", "--wait=true")
+                  }
+                }
+              }
+            }
+          }
+          stage('Create DEV') {
+            when {
+              expression {
+                openshift.withCluster() {
+                  openshift.withProject(env.DEV_PROJECT) {
+                    return !openshift.selector('dc', 'maingateway-service').exists()
+                  }
+                }
+              }
+            }
+            steps {
+              script {
+                openshift.withCluster() {
+                  openshift.withProject(env.DEV_PROJECT) {
+                    def app = openshift.newApp("maingateway-service:latest")
+                    app.narrow("svc").expose();
+
+                    //http://localhost:8080/actuator/health
+                    openshift.set("probe dc/bookstore --readiness --get-url=http://:8080/actuator/health --initial-delay-seconds=30 --failure-threshold=10 --period-seconds=10")
+                    openshift.set("probe dc/bookstore --liveness  --get-url=http://:8080/actuator/health --initial-delay-seconds=180 --failure-threshold=10 --period-seconds=10")
+
+                    def dc = openshift.selector("dc", "bookstore")
+                    while (dc.object().spec.replicas != dc.object().status.availableReplicas) {
+                        sleep 10
+                    }
+                    openshift.set("triggers", "dc/bookstore", "--manual")
+                  }
+                }
+              }
+            }
+          }
+          stage('Deploy DEV') {
+            steps {
+              script {
+                openshift.withCluster() {
+                  openshift.withProject(env.DEV_PROJECT) {
+                    openshift.selector("dc", "maingateway-service").rollout().latest();
+                  }
+                }
+              }
+            }
+          }
+          stage('Promote to STAGE?') {
+            steps {
+              script {
+                openshift.withCluster() {
+                  openshift.tag("${env.DEV_PROJECT}/bookstore:latest", "${env.STAGE_PROJECT}/bookstore:${version}")
+                }
+              }
+            }
+          }
+          stage('Deploy STAGE') {
+            steps {
+              script {
+                openshift.withCluster() {
+                  openshift.withProject(env.STAGE_PROJECT) {
+                    if (openshift.selector('dc', 'bookstore').exists()) {
+                      openshift.selector('dc', 'bookstore').delete()
+                      openshift.selector('svc', 'bookstore').delete()
+                      openshift.selector('route', 'bookstore').delete()
+                    }
+
+                    openshift.newApp("bookstore:${version}").narrow("svc").expose()
+                    openshift.set("probe dc/bookstore --readiness --get-url=http://:8080/actuator/health --initial-delay-seconds=30 --failure-threshold=10 --period-seconds=10")
+                    openshift.set("probe dc/bookstore --liveness  --get-url=http://:8080/actuator/health --initial-delay-seconds=180 --failure-threshold=10 --period-seconds=10")
+                  }
+                }
+              }
+            }
+          }
         }
-    
-        stage ('DEV - Image build'){
-            echo 'Building docker image and deploying to Dev'
-            buildApp('rh-dev', "maingateway-service")
-            echo "This is the build number: ${env.BUILD_NUMBER}"
-        }
-    
-        stage ('Automated tests'){
-            echo 'This stage simulates automated tests'
-            sh "mvn -B -Dmaven.test.failure.ignore test"
-        }
-    
-        stage ('QA - Promote image'){
-            echo 'Deploying to QA'
-            promoteImage('helloworld-msa-dev', 'helloworld-msa-qa', 'aloha', 'latest')
-        }
-    
-        stage ('Wait for approval'){
-            input 'Approve to production?'
-        }
-    
-        stage ('PRD - Promote image'){
-            echo 'Deploying to production'
-            promoteImage('helloworld-msa-qa', 'helloworld-msa', 'aloha', env.BUILD_NUMBER)
-        }
-
-        stage ('PRD - Canary Deploy'){
-            echo 'Performing a canary deployment'
-            canaryDeploy('helloworld-msa', 'aloha', env.BUILD_NUMBER)
-        }
-
-    }
-}
-
-
-def buildApp(project, app){
-    projectSet(project)
-    sh ''' 
-    cd maingateway-service
-    ls -last 
-    oc new-build -n ${project} --binary --name=${app} -l app=${app} || echo 'Build exists'
-    oc start-build ${app} -n ${project} --from-dir=. --follow
-    
-    ''' 
-    deployApp(project, app, 'latest')
-}
-
-def projectSet(project) {
-    sh "oc new-project ${project} || echo 'Project exists'"
-    sh "oc project ${project}"
-    sh "oc policy add-role-to-user admin developer -n ${project}"
-}
-
-
-def deployApp(project, app, tag){
-    sh "oc new-app --name=${app} -n ${project} -l app=${app},hystrix.enabled=true --image-stream=${project}/${app}:${tag} || echo 'Aplication already Exists'"
-    sh "oc expose service ${app} -n ${project} || echo 'Service already exposed'"
-    sh "oc set probe dc/${app} -n ${project} --readiness --get-url=http://:8080/api/health"
-}
-
-
-def promoteImage(origProject, project, app, tag){
-    projectSet(project)
-    sh "oc policy add-role-to-user system:image-puller system:serviceaccount:${project}:default -n ${origProject}"
-    sh "oc tag ${origProject}/${app}:latest ${project}/${app}:${tag}"
-    deployApp(project, app, tag)
-}
-
-def canaryDeploy(project, app, version){
-    sh "oc new-app -n ${project} --name ${app}-${version} ${app}:${version} -l app=${app},deploymentconfig=${app}-${version},hystrix.enabled=true"
-    sh "oc set probe -n ${project} dc/${app}-${version} --readiness --get-url=http://:8080/api/health"
-    sh "oc patch svc/${app} -n ${project} -p '{\"spec\":{\"selector\":{\"app\": \"${app}\", \"deploymentconfig\": null}, \"sessionAffinity\":\"None\"}}' || echo 'Service ${app} already patched'"
-    sh "oc delete service ${app}-${version} -n ${project}"
-}
+      }
