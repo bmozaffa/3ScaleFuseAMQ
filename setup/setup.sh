@@ -4,7 +4,7 @@
 
 oc login -u $USER
 
-oc delete project $CICD_PROJECT
+#oc delete project $CICD_PROJECT
 oc new-project $CICD_PROJECT 2> /dev/null
 while [ $? \> 0 ]; do
     sleep 1
@@ -14,7 +14,7 @@ done
 
 oc new-app jenkins-persistent
 
-oc delete project $DEV_PROJECT
+#oc delete project $DEV_PROJECT
 oc new-project $DEV_PROJECT 2> /dev/null
 while [ $? \> 0 ]; do
     sleep 1
@@ -39,7 +39,7 @@ oc policy add-role-to-user edit system:serviceaccount:${CICD_PROJECT}:jenkins -n
 oc policy add-role-to-user edit system:serviceaccount:${CICD_PROJECT}:default -n ${DEV_PROJECT}
 oc policy add-role-to-user view --serviceaccount=default -n ${DEV_PROJECT}
 
-oc delete project $PROD_PROJECT
+#oc delete project $PROD_PROJECT
 oc new-project $PROD_PROJECT 2> /dev/null
 while [ $? \> 0 ]; do
     sleep 1
