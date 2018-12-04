@@ -6,7 +6,7 @@ def version, mvnCmd = "mvn fabric8:deploy"
         stages {
           stage('Build App') {
             steps {
-              git branch: 'openshift', url: 'https://github.com/redhatHameed/3ScaleFuseAMQ.git'
+              git branch: 'master', url: 'https://github.com/redhatHameed/3ScaleFuseAMQ.git'
               script {
                   def pom = readMavenPom file: '/maingateway-service/pom.xml'
                   version = pom.version
