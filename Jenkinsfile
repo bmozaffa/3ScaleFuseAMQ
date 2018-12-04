@@ -8,6 +8,7 @@ def version, mvnCmd = "mvn fabric8:deploy"
             steps {
               git branch: 'master', url: 'https://github.com/redhatHameed/3ScaleFuseAMQ.git'
               script {
+		  sh "pwd && ls -la maingateway-service"
                   def pom = readMavenPom file: '/maingateway-service/pom.xml'
                   version = pom.version
               }
