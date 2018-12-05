@@ -8,4 +8,10 @@ spec:
       uri: "https://github.com/redhatHameed/3ScaleFuseAMQ.git"
   strategy:
     jenkinsPipelineStrategy:
+      env:
+        - name: DEV_PROJECT
+          value: ${DEV_PROJECT}
+        - name: STAGE_PROJECT
+          value: ${STAGE_PROJECT}
+
       jenkinsfilePath: "Jenkinsfile"
