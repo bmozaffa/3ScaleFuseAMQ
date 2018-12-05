@@ -22,32 +22,15 @@ def version, mvnCmd = "mvn"
             }
           }
          
-          stage('Create Image Builder') {
-
-            when {
-              expression {
-                openshift.withCluster() {
-                  openshift.withProject(env.DEV_PROJECT) {
-                    return !openshift.selector("bc", "maingateway-service").exists();
-                  }
-                }
-              }
-            }
-            steps {
-              script {
-                openshift.withCluster() {
-                  openshift.withProject() {
-                    openshift.newBuild("--name=maingateway-service", "--image-stream=redhat-openjdk18-openshift:1.3", "--binary=true")
-                  }
-                }
-              }
-            }
-          }
+         
           stage('Build Image') {
             steps {
               sh "cd maingateway-service && rm -rf ocp && mkdir -p ocp/deployments"
               sh "cd maingateway-service && pwd && ls -la target "
               sh "cd maingateway-service && cp target/maingateway-*.jar ocp/deployments"
+	      sh "cd maingateway-service && oc new-build -n env.DEV_PROJECT --binary --name=maingateway-service -l app=maingateway-service || echo 'Build exists'"
+	      sh "cd maingateway-service && oc start-build ${app} -n ${project} --from-dir=/maingateway-service/ocp --follow"
+
 
               script {
                 openshift.withCluster() {
