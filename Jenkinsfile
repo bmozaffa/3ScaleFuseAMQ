@@ -28,8 +28,8 @@ def version, mvnCmd = "mvn"
               sh "cd maingateway-service && rm -rf ocp && mkdir -p ocp/deployments"
               sh "cd maingateway-service && pwd && ls -la target "
               sh "cd maingateway-service && cp target/maingateway-*.jar ocp/deployments"
-	      sh "cd maingateway-service && oc new-build -n env.DEV_PROJECT --binary --name=maingateway-service -l app=maingateway-service || echo 'Build exists'"
-	      sh "cd maingateway-service && oc start-build ${app} -n ${project} --from-dir=/maingateway-service/ocp --follow"
+	      sh "cd maingateway-service && oc new-build -n ahameed --binary --name=maingateway-service -l app=maingateway-service || echo 'Build exists'"
+	      sh "cd maingateway-service && oc start-build ${app} -n ahameed --from-dir=/maingateway-service --follow"
 
 
               script {
