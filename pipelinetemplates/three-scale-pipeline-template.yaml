@@ -1,18 +1,18 @@
 apiVersion: template.openshift.io/v1
 kind: Template
 labels:
-  template: pipeline-integration
+  template: pipeline-threescale-publish
 metadata:
   annotations:
-    description: Demo Deployment Pipeline
-  name: pipeline-integration
+    description: three scale environment parameters Pipeline
+  name: pipeline-threescale-publish
 objects:
 - apiVersion: v1
   kind: BuildConfig
   metadata:
     labels:
-      name: pipeline-integration
-    name: pipeline-integration
+      name: pipeline-threescale-publish
+    name: pipeline-threescale-publish
   spec:
     output: null
     postCommit: null
@@ -27,7 +27,7 @@ objects:
     strategy:
       type: JenkinsPipeline
       jenkinsPipelineStrategy:
-        jenkinsfilePath: Jenkinsfile
+        jenkinsfilePath: jenkins-publish-3scale-ansible
         env:
         - name: GIT_BRANCH
           value: ${GIT_BRANCH}
@@ -82,7 +82,7 @@ parameters:
   value: master
   required: true
 - name: API_URL
-  value: fisgateway-service-fisdemoprod.master.rhdp.ocp.cloud.lab.eng.bos.redhat.com:80
+  value: cicd-apicast-staging.app.rhdp.ocp.cloud.lab.eng.bos.redhat.com:443
   required: true
 - name: WILDCARD_DOMAIN
   displayName: Threescale cicd wildcard domain
@@ -134,9 +134,6 @@ parameters:
   required: true
 - name: OPENSHIFT_DEPLOYMENT_CONFIG
   value: 3scaleFuse
-  required: true
-- name: MICROCKS_SERVER_URL
-  value: http://microcks:8080/api
   required: true
 - name: THREESCALE_URL
   displayName: Admin URL of Threescale
