@@ -8,32 +8,30 @@
         class="org.apache.camel.component.servlet.CamelHttpTransportServlet"
         id="camelHttpTransportServlet" scope="singleton"/>
     <bean
-        class="org.springframework.boot.web.servlet.ServletRegistrationBean"
-        id="servlet" scope="singleton">
+        class="org.springframework.boot.web.servlet.ServletRegistrationBean" id="servlet">
         <property name="name" value="CamelServlet"/>
         <property name="servlet" ref="camelHttpTransportServlet"/>
         <property name="urlMappings" value="/cicd/*"/>
     </bean>
     <bean
-        class="org.springframework.boot.web.servlet.ServletRegistrationBean"
-        id="hystrixservlet" scope="singleton">
+        class="org.springframework.boot.web.servlet.ServletRegistrationBean" id="hystrixservlet">
         <property name="name" value="HystrixServlet"/>
         <property name="servlet" ref="hystrixEventStreamServlet"/>
         <property name="urlMappings" value="/hystrix.stream"/>
     </bean>
-    <camelContext id="camel" xmlns="http://camel.apache.org/schema/spring">
+    <camelContext id="camelContext-a73e7fe1-456e-4e15-9926-fae906325f11" xmlns="http://camel.apache.org/schema/spring">
         <restConfiguration apiContextPath="api-docs" bindingMode="json"
             component="servlet" contextPath="/cicd" enableCORS="true">
             <apiProperty key="cors" value="true"/>
-            <apiProperty key="api.title" value="gateway-userlart"/>
+            <apiProperty key="api.title" value="FIS Gateway"/>
             <apiProperty key="api.version" value="1.0.0"/>
             <corsHeaders key="Access-Control-Allow-Origin" value="*"/>
             <corsHeaders key="Access-Control-Allow-Methods" value="GET, HEAD, POST, PUT, DELETE, TRACE, OPTIONS, CONNECT, PATCH"/>
             <corsHeaders key="Access-Control-Allow-Headers" value="Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers"/>
         </restConfiguration>
-        <rest id="rest-20a908e5-a77a-4dd3-84c6-c59429d59f6a" path="/maingateway">
-            <get id="get-3b123fbf-b92a-4270-9e0a-0fd89a066e4e" uri="profile/{acctid}">
-                <to uri="direct:getprofile"/>
+        <rest id="rest-537dace9-d0d1-4f4a-8e37-e10487da77e0" path="/maingateway">
+            <get id="test" uri="test">
+                <to uri="direct:doNoresponse"/>
             </get>
         </rest>
         <route id="gateway">
