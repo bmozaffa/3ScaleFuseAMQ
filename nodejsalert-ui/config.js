@@ -11,7 +11,7 @@ development: {
     //3scale details
     threescale: {
          url: 'https://cicd-apicast-staging.app.rhdp.ocp.cloud.lab.eng.bos.redhat.com:443/cicd/maingateway/',
-         token: 'c07794ea12a274c855a302b1e7c17bb9'
+         token: '65f3eb43862f83427aba4f0811ae14ac'
     }
 },
 production: {
@@ -28,7 +28,7 @@ production: {
     //3scale details
     threescale: {
         url: 'https://cicd-apicast-staging.app.rhdp.ocp.cloud.lab.eng.bos.redhat.com:443/cicd/maingateway/',
-        token: 'c07794ea12a274c855a302b1e7c17bb9'
+        token: '65f3eb43862f83427aba4f0811ae14ac'
     }
 
 }
