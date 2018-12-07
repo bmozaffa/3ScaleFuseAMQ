@@ -27,7 +27,7 @@ securityDefinitions:
     type: apiKey
     description: Use a 3scale API Key
     name: api-key
-    in: header
+    in: query
 security:
 - apikey: []
 tags:
