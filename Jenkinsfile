@@ -13,7 +13,7 @@ pipeline {
     }
     environment { 
         openShiftHost = 'https://master.rhdp.ocp.cloud.lab.eng.bos.redhat.com:8443'
-        openShiftToken = '555kYTHpxkj3liEBgD6t44loUBdDx9sFi8s2yrGbXvw'
+        //openShiftToken = '555kYTHpxkj3liEBgD6t44loUBdDx9sFi8s2yrGbXvw'
         mySqlUser = 'dbuser'
         mySqlPwd = 'password'
     }
