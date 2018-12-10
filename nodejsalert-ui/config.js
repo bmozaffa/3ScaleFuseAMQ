@@ -10,12 +10,12 @@ development: {
     },
     //3scale details
     threescale: {
-         url: 'https://cicd-apicast-staging.app.rhdp.ocp.cloud.lab.eng.bos.redhat.com:443/cicd/maingateway/',
-         token: '65f3eb43862f83427aba4f0811ae14ac'
+         url: 'https://3scale-prod-1.app.rhdp.ocp.cloud.lab.eng.bos.redhat.com:443/cicd/maingateway/',
+         token: 'ab6283abd6fd695fd4b31e8bf82d5e462c13e998'
     }
 },
 production: {
-  
+
 
     //mongodb connection settings
     database: {
@@ -27,8 +27,8 @@ production: {
 
     //3scale details
     threescale: {
-        url: 'https://cicd-apicast-staging.app.rhdp.ocp.cloud.lab.eng.bos.redhat.com:443/cicd/maingateway/',
-        token: '65f3eb43862f83427aba4f0811ae14ac'
+        url: 'https://3scale-prod-1.app.rhdp.ocp.cloud.lab.eng.bos.redhat.com:443/cicd/maingateway/',
+        token: 'ab6283abd6fd695fd4b31e8bf82d5e462c13e998'
     }
 
 }

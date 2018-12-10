@@ -112,7 +112,7 @@ parameters:
   value: tower
   required: true
 - name: ANSIBLE_SMOKE_TEST_OPREATION
-  value: 
+  value: rout2
   required: false
 - name: OPENSHIFT_SERVICE_NAME
   value: 3scale-prod
