@@ -22,6 +22,14 @@ paths:
       responses:
         200:
           description: data recived
+  /maingateway/logo:
+    get:
+      tags:
+      - maingateway
+      operationId: route2
+      responses:
+        200:
+          description: OK
 securityDefinitions:
   apikey:
     type: apiKey
@@ -31,5 +39,5 @@ securityDefinitions:
 security:
 - apikey: []
 tags:
-- name: sourcegateway
+- name: maingateway
   description: API Gateway
