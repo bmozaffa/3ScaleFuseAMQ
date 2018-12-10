@@ -39,7 +39,7 @@ objects:
           value: ${DEPLOY_MODULE}
 parameters:
 - name: GIT_REPO
-  value: https://github.com/myeung18/3ScaleFuseAMQ.git
+  value: https://github.com/bmozaffa/3ScaleFuseAMQ.git
   required: true
 - name: GIT_BRANCH
   value: master
