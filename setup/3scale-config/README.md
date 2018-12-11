@@ -114,7 +114,27 @@ threescale_cicd_wildcard_domain: prod.app.itix.fr
 
 ### 6/ Create the Jenkins Pipeline
 
-* review the pipelinetemplates/three-scale-pipeline-template.yaml` and change it as per your configuration and save it.
+* review the pipelinetemplates/three-scale-pipeline-template.yaml` paramets and change it as per your configuration and save it.
+
+
+     * below are list of paramertes:
+        * GIT_REPO=<Your git Repo> example:https://github.com/redhatHameed/3ScaleFuseAMQ.git
+        * GIT_BRANCH=master
+        * API_URL=<API URL> example : maingateway-service-cicddemo.app.rhdp.ocp.cloud.lab.eng.bos.redhat.com:80
+        * Threescale cicd wildcard domain=<WILD CARD DOMAIN> example : app.rhdp.**.**.com
+        * Threescale API CAST Major Version=1
+        * SWAGGER_FILE_NAME=openapi-spec.yaml
+        * ANSIBLE_TEST_INVENTORY=3scale-test
+        * ANSIBLE_PROD_INVENTORY=3scale-prod
+        * ANSIBLE_JOB_TEMPLATE=Deploy an API to 3scale
+        * ANSIBLE_TOWER_SERVER=tower
+        * ANSIBLE_SMOKE_TEST_OPREATION=route2 : name of smoke test method
+        * ROUTE_SERVICE_NAME=3scale-prod
+        * API_CAST_ROUTE_TEMPLATE_FILE=https://github.com/redhatHameed/IntegrationApp-Automation/blob/master/apicast-routes-template.yaml
+        * The Name of API CAST Gateway Project or 3scale project name deployed on Openshift to create the routes=ah-3scale-ansible
+
+
+
 
 - Go to your OpenShift Jenkins Project 
 

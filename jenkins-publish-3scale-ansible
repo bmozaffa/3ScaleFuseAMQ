@@ -13,7 +13,7 @@ node('maven') {
 		threescale_cicd_api_backend_hostname: params.API_URL,
 		threescale_cicd_openapi_smoketest_operation: params.ANSIBLE_SMOKE_TEST_OPREATION,
 		threescale_cicd_api_backend_scheme: "http",
-		threescale_cicd_api_base_system_name: params.OPENSHIFT_SERVICE_NAME,
+		threescale_cicd_api_base_system_name: params.ROUTE_SERVICE_NAME,
 		threescale_cicd_validate_openapi: false,
 		openapi_file: params.SWAGGER_FILE_NAME
 	]
