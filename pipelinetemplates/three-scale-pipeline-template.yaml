@@ -41,24 +41,8 @@ objects:
           value: ${ANSIBLE_JOB_TEMPLATE}
         - name: ANSIBLE_TOWER_SERVER
           value: ${ANSIBLE_TOWER_SERVER}
-        - name: OPENSHIFT_SERVICE_NAME
-          value: ${OPENSHIFT_SERVICE_NAME}
-        - name: OPENSHIFT_IMAGE_STREAM
-          value: ${OPENSHIFT_IMAGE_STREAM}
-        - name: OPENSHIFT_BUILD_CONFIG
-          value: ${OPENSHIFT_BUILD_CONFIG}
-        - name: OPENSHIFT_BUILD_PROJECT
-          value: ${OPENSHIFT_BUILD_PROJECT}
-        - name: OPENSHIFT_TEST_ENVIRONMENT
-          value: ${OPENSHIFT_TEST_ENVIRONMENT}
-        - name: OPENSHIFT_PROD_ENVIRONMENT
-          value: ${OPENSHIFT_PROD_ENVIRONMENT}
-        - name: OPENSHIFT_DEPLOYMENT_CONFIG
-          value: ${OPENSHIFT_DEPLOYMENT_CONFIG}
-        - name: THREESCALE_URL
-          value: ${THREESCALE_URL}
-        - name: API_TOKEN
-          value: ${API_TOKEN}
+        - name: ROUTE_SERVICE_NAME
+          value: ${ROUTE_SERVICE_NAME}
         - name: WILDCARD_DOMAIN
           value: ${WILDCARD_DOMAIN}
         - name: MAJOR_VERSION
@@ -112,37 +96,15 @@ parameters:
   value: tower
   required: true
 - name: ANSIBLE_SMOKE_TEST_OPREATION
-  value: rout2
+  value: route2
   required: false
-- name: OPENSHIFT_SERVICE_NAME
+- name: ROUTE_SERVICE_NAME
   value: 3scale-prod
   required: true
-- name: OPENSHIFT_BUILD_PROJECT
-  value: cicddemo
-  required: true
-- name: OPENSHIFT_TEST_ENVIRONMENT
-  value: cicddemo
-  required: true
-- name: OPENSHIFT_PROD_ENVIRONMENT
-  value: cicddemo
-  required: true
-- name: OPENSHIFT_DEPLOYMENT_CONFIG
-  value: 3scaleFuse
-  required: true
-- name: THREESCALE_URL
-  displayName: Admin URL of Threescale
-  required: true
-  value: https://ah-3scale-ansible-admin.app.rhdp.ocp.cloud.lab.eng.bos.redhat.com
-  description: Admin URL of Threescale
-- name: API_TOKEN
-  displayName: Access token from 3scale 
-  required: true
-  value: 46ca1afb210333407e8fb151ea69fd9076a53aaff37996f4c0e0540816976242
-  description: Access token from 3scale for calling management API
 - name: API_CAST_ROUTE_TEMPLATE_FILE
   displayName: API_CAST_ROUTE_TEMPLATE_FILE 
   required: true
-  value: https://raw.githubusercontent.com/redhatHameed/fuse-financial-cicd/master/apicast-routes-template.yaml
+  value: https://github.com/redhatHameed/IntegrationApp-Automation/blob/master/apicast-routes-template.yaml
   description: apicast route template file used to create the routes
 - name: THREESCALE_OPENSHIFT_PROJECT
   displayName: The Name of API CAST Gateway Project or 3scale project name deployed on Openshift to create the routes
