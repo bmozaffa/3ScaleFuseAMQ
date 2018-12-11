@@ -26,6 +26,10 @@ The example can be built with
 
     mvn clean install
 
+local url:
+
+http://localhost:8080/cicd/maingateway/profile/11111?alertType=accident
+
 ### Running the example in OpenShift
 
 It is assumed that:
