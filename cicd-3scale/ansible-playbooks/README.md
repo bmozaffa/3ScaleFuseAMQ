@@ -1,4 +1,4 @@
-# 3scale Ansible playbook setup
+# 3scale Ansible CICD
 
 
 
@@ -11,14 +11,13 @@ This role requires:
 - a Swagger 2.0 file describing the API you want to publish
 
 
-On the control node, the `jmespath` library is required. If it is not already there,
-you can install it with:
+On the control node, the `jmespath` library is required. install it with:
 
 ```sh
 pip install jmespath
 ```
 
-A recent version of Jinja (2.8) is also required. You can upgrade your Jinja version with:
+Jinja (2.8) is also required. You can upgrade your Jinja version with:
 
 ```sh
 pip install -U Jinja2
@@ -28,8 +27,6 @@ If your control node runs on RHEL7, you can run
 [this playbook](https://github.com/nmasse-itix/OpenShift-Lab/blob/master/common/verify-local-requirements.yml)
 to install the missing dependencies.
 
-
-
 ## Steps: Publish an API on 3scale 
  
  1. Craft a Swagger file for API
@@ -37,8 +34,8 @@ to install the missing dependencies.
  3. Write the playbook
  4. Run the playbook!
 
-1.Generate Swagger file of your api and to secure your API with API Key add below linces in Swagger file
-
+1.Generate Swagger file of your api and to secure your API with API Key add below lines in Swagger file
+```yaml
 security:
 - apikey: []
 securityDefinitions:
@@ -46,7 +43,7 @@ securityDefinitions:
     name: api-key
     in: header
     type: apiKey
-
+```
 
 Write the `inventory` file:
 
@@ -68,7 +65,7 @@ threescale_cicd_wildcard_domain=<DOMNA NAME>
 
 write the playbook (`deploy-api.yaml`):
 
-``yaml
+```yaml
 - hosts: threescale
   gather_facts: no
   vars:
@@ -82,7 +79,7 @@ write the playbook (`deploy-api.yaml`):
   - nmasse-itix.threescale-cicd
 ```
 
-## creat requirment file under role folder. 
+## create requirment file under role folder. 
 
 roles/requirements.yml
 
@@ -91,19 +88,20 @@ roles/requirements.yml
   version: master
 
 
-update the role to its latest version with:
-
-```sh
-$ ansible-galaxy install -f nmasse-itix.threescale-cicd,master -p roles/
-
-```
-
-
 ## Running the playbooks
 
 
 ```sh
+
+./runansible.sh
+
+or 
+
 ansible-galaxy install nmasse-itix.threescale-cicd
 ansible-playbook -i inventory deploy-api.yaml
 ```
+update the role to its latest version with:
 
+```sh
+   ansible-galaxy install -f nmasse-itix.threescale-cicd,master -p roles/
+```
